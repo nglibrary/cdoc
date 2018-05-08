@@ -1,0 +1,13 @@
+@import './config';
+@import './helpers/_index';
+@import './animations/_index';
+@import './base/_index';
+@import './components/_index';
+
+:host-context(.choosy) {
+  @import './types/_index';
+  ::ng-deep {
+    @import './widgets/_index';
+    @import './views/_index';
+  }
+}

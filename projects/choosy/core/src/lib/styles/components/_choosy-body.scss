@@ -1,0 +1,8 @@
+.choosy--body {
+  @include scrollbar;
+  padding: 0.6rem;
+  padding-top: 0;
+  display: block;
+  overflow: auto;
+  position: relative;
+}

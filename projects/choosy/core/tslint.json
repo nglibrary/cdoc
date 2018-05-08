@@ -1,0 +1,8 @@
+{
+  "extends": "../../../tslint.json",
+  "rules": {
+    "directive-selector": [true, "attribute", "choosy", "camelCase"],
+    "component-selector": [true, "element", "choosy", "kebab-case"],
+    "component-class-suffix": [true, "Component", "Panel", "View", "Widget"]
+  }
+}

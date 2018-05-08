@@ -1,0 +1,30 @@
+@charset "UTF-8";
+$choosy--themes: (
+  'classic': 'CLASSIC',
+  'dark': 'DARK'
+);
+$choosy--colors: (
+  'view-bg-col': #fff,
+  'view-border-col': #d5d8de,
+  'view-text-col': #2d343e,
+  'view-placeholder-col': #cfd5dc,
+  'filter-inp-border-col': #d5d8de,
+  'option-hover-bg': #f3f6f7,
+  'option-selected-bg': #e2f3f5
+);
+$choosy--font-sizes: (
+  'sm': 0.8rem,
+  'md': 1rem,
+  'lg': 1.2rem
+);
+$choosy--border-rad: 3px;
+$choosy--view-border-rad: $choosy--border-rad;
+$choosy--filter-inp-border-rad: $choosy--border-rad;
+$choosy--option-border-rad: $choosy--border-rad;
+$choosy--view-offset: 5px;
+$choosy--debug: false;
+
+$choosy--scrollbar-width: 7px;
+$choosy--scrollbar-hover-width: 10px;
+
+$choosy--font-path: '../assets/icons';

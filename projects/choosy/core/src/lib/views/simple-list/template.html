@@ -1,0 +1,6 @@
+<ng-container *ngIf="options|async as opt">
+  <ng-container *ngFor="let option of opt;trackBy:trackByFn">
+    <choosy-option-widget [option]="option" [optionTpl]="optionTpl" (clicked)="optionClicked.emit($event)" (hover)="optionOnFocus.emit($event)"
+      *ngIf="!option.state.hidden"></choosy-option-widget>
+  </ng-container>
+</ng-container>
