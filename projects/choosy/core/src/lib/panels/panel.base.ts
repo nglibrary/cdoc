@@ -16,18 +16,12 @@ import {
 import { Observable, Subject, fromEvent } from 'rxjs';
 import { takeUntil, map, filter, switchMap, debounceTime, tap, delay } from 'rxjs/operators';
 import { OptionsService, ConfigService } from '../services';
-import { ChoosyConfig, ChoosyOption } from '../models';
-
-const keyCodes = {
-  '38': 'UP',
-  '40': 'DOWN',
-  '13': 'ENTER'
-};
+import { ChoosyConfig, ChoosyOption, KeyboardAction } from '../models';
 
 export const BASE_CONFIG: Component = {
   preserveWhitespaces: false,
   exportAs: 'choosyRef',
-  changeDetection: ChangeDetectionStrategy.OnPush,
+  // changeDetection: ChangeDetectionStrategy.OnPush,
   providers: [OptionsService]
 };
 
@@ -122,12 +116,7 @@ export abstract class ChoosyBasePanel implements OnChanges {
 
   watchKeyPress() {
     fromEvent(this.elRef.nativeElement, 'keydown')
-      .pipe(
-        takeUntil(this._alive),
-        map((x: KeyboardEvent) => x.keyCode),
-        map(x => keyCodes[x]),
-        filter(x => x !== undefined)
-      )
+      .pipe(takeUntil(this._alive), map((x: KeyboardEvent) => x.keyCode), filter(x => x !== undefined))
       .subscribe(x => this._keyPressSub.next(x));
   }
 
@@ -137,21 +126,21 @@ export abstract class ChoosyBasePanel implements OnChanges {
       .pipe(
         takeUntil(this._alive),
         tap(x => {
-          if (x === 'UP') {
+          x = String(x);
+          if (x === KeyboardAction.UP) {
             this.optionsService.markPreviousAsActive();
-          } else if (x === 'DOWN') {
+          } else if (x === KeyboardAction.DOWN) {
             this.optionsService.markNextAsActive();
-          } else if (x === 'ENTER') {
+          } else if (x === KeyboardAction.ENTER) {
             this.optionsService.selectActiveOption();
           }
         }),
-        filter(x => x !== 'ENTER'),
-        delay(10)
+        filter(x => x !== KeyboardAction.ENTER)
       )
       .subscribe(a => {
-        const child = this.elRef.nativeElement.querySelector(optionEl);
-        const parent = child.parentNode.parentNode.parentNode;
-        parent.scrollTop = child.offsetTop - parent.offsetTop;
+        // const child = this.elRef.nativeElement.querySelector(optionEl);
+        // const parent = child.parentNode.parentNode.parentNode;
+        // parent.scrollTop = child.offsetTop - parent.offsetTop;
       });
   }
 

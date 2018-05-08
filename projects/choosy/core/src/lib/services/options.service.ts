@@ -19,6 +19,9 @@ export class OptionsService implements OnDestroy {
   constructor(private _searchService: SearchService) {}
 
   selectOption(option: ChoosyOption): void {
+    if (!this.settings.multiSelect.enable) {
+      this._latestFilteredOptions.map(z => (z.state.selected = false));
+    }
     const opts = this.optionsSub.getValue().map((o: ChoosyOption) => {
       o.state.active = false;
       if (!this.settings.multiSelect.enable) {
@@ -264,7 +267,6 @@ export class OptionsService implements OnDestroy {
       }
       return x;
     });
-
     this._triggerAction(nxt, 'markedNextAsActive', nextItem);
   }
   markPreviousAsActive() {

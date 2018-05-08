@@ -95,3 +95,9 @@ export interface ChoosyView {
   options: Observable<ChoosyOptions>;
   config: ChoosyConfig;
 }
+
+export enum KeyboardAction {
+  UP = '38',
+  DOWN = '40',
+  ENTER = '13'
+}
